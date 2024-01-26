@@ -17,10 +17,10 @@
       <p>Which one do you prefer?</p>
     </form>
     <form method="POST" action="{{ url_for('button_function') }}">
-      <button name='results' type = "submit"> {{ option1 }}</button>
-      <button name='results'  type = "submit"> {{ option2 }}</button>
-      <button name='results'  type = "submit"> both</button>
-      <button name='results'  type = "submit"> neither</button>
+      <button name='results'  value = "{{ option1 }}" type = "submit"> {{ option1 }}</button>
+      <button name='results'  value = "{{ option2 }}" type = "submit"> {{ option2 }}</button>
+      <button name='results' value = "both"  type = "submit"> both</button>
+      <button name='results' value = "neither" type = "submit"> neither</button>
     </form>
 
 </body>
