@@ -51,27 +51,12 @@ def index():
     options = load_data()
     return render_template('index.html', options=options)
 
-@app.route('/vote', methods=['POST'])
-def vote():
-    option = request.form.get('option')
-
-    # Load existing data
-    data = load_data()
-    # Find the option and update the votes
-    for row in data:
-        if row['option'] == option:
-            row['votes'] = str(int(row['votes']) + 1)
-            break
-
     # Save the updated data
     save_data(data)
     return redirect(url_for('index'))
 
-
-
 @app.route('/modelcomp', methods=['POST'])
 def modelcomp():
-
     option1 = request.form.get('option1')
     option2 = request.form.get('option2')
     my_num = request.form.get('num')
@@ -80,16 +65,14 @@ def modelcomp():
     ques = my_load_data('questions')
     my_data = my_load_data(option1)
     my_data2 = my_load_data(option2)
-    #model1 = my_data['']
-    
+
     tst_data = my_data
-    
 
     for row in ques:
         if row['nums'] == str(my_num):
             ques1 = row['cvp']
             break
-    
+
     for row in my_data:
         if row['nums'] == str(my_num):
             cvp1 = row['cvp']
@@ -99,22 +82,14 @@ def modelcomp():
         if row['nums'] == str(my_num):
             cvp2 = row['cvp']
             break
-    
-    return render_template('modelcomp.html', my_num=my_num, cvp1=cvp1, cvp2=cvp2, option1=option1, option2=option2, tst_data=tst_data, ques1=ques1, user=user )
 
-    return "Row not found"
+    return render_template('modelcomp.html', my_num=my_num, cvp1=cvp1, cvp2=cvp2, option1=option1, option2=option2, tst_data=tst_data, ques1=ques1, user=user)
 
-
-@app.route('/modelcomp/vote', methods=['POST'])
-def vote2():
-    option = request.form.get('vote')
-
-    # Load existing data
-    return 'alo'
-
-    # Save the updated data
-    save_data(data)
-
+@app.route('/modelcomp/button_function', methods=['POST'])
+def button_function():
+    # Perform your specific function here
+    print("Button clicked! Performing specific function.")
+    return "Function executed successfully."
 
 if __name__ == '__main__':
     app.run(debug=True)
