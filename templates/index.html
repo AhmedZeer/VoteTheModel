@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static\css\main.css') }}">
+</head>
+<body>
+    <h1>Vote for an Option</h1>
+    <form method="POST" action="{{ url_for('modelcomp') }}">
+
+        <input type="text" name="User" placeholder="Enter your name" required><br>
+        <hr>
+        
+        <select name="option1">
+            {% for option in options %}
+                <option value="{{ option['option'] }}">{{ option['option'] }}</option>
+            {% endfor %}
+        </select>
+
+
+        <select name="option2">
+            {% for option in options %}
+                <option value="{{ option['option'] }}">{{ option['option'] }}</option>
+            {% endfor %}
+        </select>
+
+               
+        <input type="number" numberInput" name="num" placeholder="Type a number">
+
+        <button type="submit">Check</button>
+    </form>
+    <h2>Current Votes</h2>
+    <ul>
+        {% for option in options %}
+            <li>{{ option['option'] }}: {{ option['votes'] }} votes</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

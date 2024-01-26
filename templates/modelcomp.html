@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('vote') }}">
+      <h1>User Input Result</h1>
+      <p>Question num: {{ my_num }}</p>
+      <p>Question is: {{ ques1 }}</p>
+      <p>what {{ option1 }} says : {{ cvp1 }}</p>
+      <p>what {{ option2 }} says : {{ cvp2 }}</p>
+      <!-- <p> {{tst_data}}</p> -->
+      <p>Which one do you prefer?</p>
+        <button name='vote' type = "submit"> {{ option1 }}</button>
+        <button  name='vote' type = "submit"> {{ option2 }}</button>
+        <button  name='vote' type = "submit"> both</button>
+    </form>
+
+</body>
+</html>
