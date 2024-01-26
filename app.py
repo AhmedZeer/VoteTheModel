@@ -49,7 +49,6 @@ def save_data(data):
 @app.route('/')
 def index():
     options = load_data()
-    user = request.form.get('User')
     return render_template('index.html', options=options)
 
 @app.route('/vote', methods=['POST'])
@@ -76,6 +75,7 @@ def modelcomp():
     option1 = request.form.get('option1')
     option2 = request.form.get('option2')
     my_num = request.form.get('num')
+    user = request.form.get('User')
 
     ques = my_load_data('questions')
     my_data = my_load_data(option1)
@@ -100,7 +100,7 @@ def modelcomp():
             cvp2 = row['cvp']
             break
     
-    return render_template('modelcomp.html', my_num=my_num, cvp1=cvp1, cvp2=cvp2, option1=option1, option2=option2, tst_data=tst_data, ques1=ques1 )
+    return render_template('modelcomp.html', my_num=my_num, cvp1=cvp1, cvp2=cvp2, option1=option1, option2=option2, tst_data=tst_data, ques1=ques1, user=user )
 
     return "Row not found"
 
@@ -110,16 +110,10 @@ def vote2():
     option = request.form.get('vote')
 
     # Load existing data
-    data = load_data()
-    # Find the option and update the votes
-    for row in data:
-        if row['option'] == option:
-            row['votes'] = str(int(row['votes']) + 1)
-            break
+    return 'alo'
 
     # Save the updated data
     save_data(data)
-    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
