@@ -17,14 +17,11 @@
       <p>Which one do you prefer?</p>
     </form>
     <form method="POST" action="{{ url_for('button_function') }}">
-<<<<<<< HEAD
       <input hidden name="user" value="{{ user }}">
       <input hidden name="my_num" value="{{ my_num }}">
       <input hidden name="ques1" value="{{ ques1 }}">
       <input hidden name="option1" value="{{ option1 }}">
       <input hidden name="option2" value="{{ option2 }}">
-=======
->>>>>>> b7d24a983f4e76f38ac72317cef8db2671c71665
       <button name='results'  value = "{{ option1 }}" type = "submit"> {{ option1 }}</button>
       <button name='results'  value = "{{ option2 }}" type = "submit"> {{ option2 }}</button>
       <button name='results' value = "both"  type = "submit"> both</button>
