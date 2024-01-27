@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='static\css\main.css') }}">
 </head>
 <body>
-    <p>Question is: {{randQ_name}}</p>
+    <p>Question is: {{randQ_text}}</p>
+    <p>First model's answer: {{model1_answr}}</p>
+    <p>Second model's answer: {{model2_answr}}</p>
+    <form method="POST" action="{{ url_for('button_function') }}">
+      <input type="text" placeholder="please enter your name" name="user" id="user"required>
+      <button name='results'  value = "{{ randModel1_name }}" type = "submit">model 1</button>
+      <button name='results'  value = "{{ randModel2_name }}" type = "submit">model 2</button>
+      <button name='results' value = "both"  type = "submit"> both</button>
+      <button name='results' value = "neither" type = "submit"> neither</button>
+    </form>
 </body>
 </html>
 
