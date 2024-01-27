@@ -8,25 +8,10 @@
 <body>
     <form method="POST" action="{{ url_for('modelcomp') }}">
       <h1>User Input Result</h1>
-      <p>Your name is: {{ user }}</p>
-      <p>Question num: {{ my_num }}</p>
       <p>Question is: {{ ques1 }}</p>
       <p>what {{ option1 }} says : {{ cvp1 }}</p>
       <p>what {{ option2 }} says : {{ cvp2 }}</p>
-      <!-- <p> {{tst_data}}</p> -->
       <p>Which one do you prefer?</p>
     </form>
-    <form method="POST" action="{{ url_for('button_function') }}">
-      <input hidden name="user" value="{{ user }}">
-      <input hidden name="my_num" value="{{ my_num }}">
-      <input hidden name="ques1" value="{{ ques1 }}">
-      <input hidden name="option1" value="{{ option1 }}">
-      <input hidden name="option2" value="{{ option2 }}">
-      <button name='results'  value = "{{ option1 }}" type = "submit"> {{ option1 }}</button>
-      <button name='results'  value = "{{ option2 }}" type = "submit"> {{ option2 }}</button>
-      <button name='results' value = "both"  type = "submit"> both</button>
-      <button name='results' value = "neither" type = "submit"> neither</button>
-    </form>
-
 </body>
 </html>

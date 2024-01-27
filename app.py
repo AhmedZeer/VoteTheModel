@@ -55,79 +55,36 @@ def save_data(data):
 
 @app.route('/')
 def index():
-  options = load_data()
-  randModel = options[random.randint(1,4)]
-  randModel_name = randModel['MODEL'] 
-  randModel_id = randModel['mID']
-  print(randModel_name)
-  print(randModel_id)
-  return render_template('index.html', options=options)
+  options = my_load_data("main")
+  questions = my_load_data("questions")
 
+  x = random.randint(1,4)
+  y = random.randint(1,4)
+  z = random.randint(1,4)
 
+  while( x == y ):
+    x = random.randint(1,4)
 
-@app.route('/modelcomp', methods=['POST'])
-def modelcomp():
-  option1 = request.form.get('option1')
-  option2 = request.form.get('option2')
-  my_num = request.form.get('num')
-  user = request.form.get('User')
-  ques = my_load_data('questions')
-  my_data = my_load_data(option1)
-  my_data2 = my_load_data(option2)
-  data_to_append = {
-      'name': user,
-      'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-      'questionNo': my_num,
-      'Models': option1 + " VS " + option2
-  }
-
-  #append_to_csv(data_to_append)
-
-  tst_data = my_data
-
-  for row in ques:
-    if row['nums'] == str(my_num):
-      ques1 = row['cvp']
-      break
-
-  for row in my_data:
-    if row['nums'] == str(my_num):
-      cvp1 = row['cvp']
-      break
-
-  for row in my_data2:
-    if row['nums'] == str(my_num):
-      cvp2 = row['cvp']
-      break
-
-  return render_template('modelcomp.html',
-                         my_num=my_num,
-                         cvp1=cvp1,
-                         cvp2=cvp2,
-                         option1=option1,
-                         option2=option2,
-                         tst_data=tst_data,
-                         ques1=ques1,
-                         user=user)
-
-
-@app.route('/modelcomp/button_function', methods=['POST'])
-def button_function():
-  option1 = request.form.get("option1")
-  option2 = request.form.get("option2")
-
-  gmt_plus_3 = pytz.timezone('Etc/GMT-3')
-  current_time_gmt_plus_3 = datetime.now(pytz.timezone('Etc/GMT-3'))
+  randModel1_name = (options[x])['MODEL']
+  randModel1_ID = (options[x])['ID']
+  randModel2_name = (options[y])['MODEL']
+  randModel2_ID = (options[y])['ID']
+  randQ_text = (questions[z])['cvp']
+  randQ_ID = (questions[z])['nums']
   
-  data_to_append = {
-      'name': request.form.get('user'),
-      'time': current_time_gmt_plus_3,
-      'questionNo': request.form.get('my_num'),
-      'Models': f"{option1} vs {option2}",
-      'Winner': request.form.get('results')
-  }
-  append_to_csv(data_to_append)
-  return request.form.get('results')
+  print("model1_name:", randModel1_name)
+  print("model1_ID:", randModel1_ID)
+  print("model2_name:", randModel2_name)
+  print("model2_ID:", randModel2_ID)
+  print("The Question:", randQ_text)
+  print("Questio ID:", randQ_ID)
+
+  
+
+  return render_template('index.html', options = options,
+                         randQ_ID = randQ_ID,)
+
+
 
 
 if __name__ == '__main__':
