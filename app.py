@@ -1,3 +1,4 @@
+import random 
 from datetime import datetime
 import pytz
 from flask import Flask, render_template, request, redirect, url_for
@@ -7,18 +8,12 @@ import os
 app = Flask(__name__)
 
 # Path to the CSV file
-csv_file_path = 'votes.csv'
+csv_file_path = 'main.csv'
 csv_file_mgpt = 'mGPT.csv'
 csv_file_llama = 'Llama.csv'
 csv_file_quest = 'questions.csv'
 csv_file_rslts = 'rslts.csv'
 
-# Check if the CSV file exists, if not create it with headers
-if not os.path.exists(csv_file_path):
-  with open(csv_file_path, 'w', newline='') as csvfile:
-    fieldnames = ['option', 'votes']
-    csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    csv_writer.writeheader()
 
 
 # Load initial data from the CSV file
@@ -47,12 +42,8 @@ def my_load_data(input_string):
   return data
 
 
-def my_load_num(num):
-  num = int(num)
-  return num
 
 
-#
 # Save data to the CSV file
 def save_data(data):
   with open(csv_file_path, 'w', newline='') as csvfile:
@@ -65,11 +56,13 @@ def save_data(data):
 @app.route('/')
 def index():
   options = load_data()
+  randModel = options[random.randint(1,4)]
+  randModel_name = randModel['MODEL'] 
+  randModel_id = randModel['mID']
+  print(randModel_name)
+  print(randModel_id)
   return render_template('index.html', options=options)
 
-  # Save the updated data
-  save_data(data)
-  return redirect(url_for('index'))
 
 
 @app.route('/modelcomp', methods=['POST'])
@@ -124,7 +117,7 @@ def button_function():
   option2 = request.form.get("option2")
 
   gmt_plus_3 = pytz.timezone('Etc/GMT-3')
-  current_time_gmt_plus_3 = datetime.now(gmt_plus_3)
+  current_time_gmt_plus_3 = datetime.now(pytz.timezone('Etc/GMT-3'))
   
   data_to_append = {
       'name': request.form.get('user'),
@@ -138,4 +131,4 @@ def button_function():
 
 
 if __name__ == '__main__':
-  app.run(host="0.0.0.0", port=8080)
+    app.run(debug=True)
